@@ -194,6 +194,17 @@ in parallel with the conversation. Prefer recent work and always record
 the date. A lane that finds nothing is a finding — it reports the
 queries it tried, not a shrug.
 
+**Search once per question, not per keyword.** `web_search` returns a
+grounded answer plus its sources in one call. Treat the answer as a lead
+and the sources as the evidence: read the two or three sources that
+carry a claim before you write it down. Batch several questions into one
+call only when they share a topic; separate topics get separate calls,
+because a mixed query returns a diluted answer.
+
+**Recency is a parameter, not a suggestion.** Pass `recency: "year"` by
+default, `"month"` for fast-moving fields. A lane whose sources are all
+older than the bar reports that as the finding.
+
 ### Routing
 
 Two kinds of agent, and the difference matters:
@@ -242,6 +253,8 @@ RULES
 - Contradictions between sources are the finding. Report both sides.
   Never silently pick a winner.
 - Primary sources over blog posts. Recency matters; say how recent.
+- One `web_search` per question. Its answer is a lead; its citations are
+  the evidence. Read the sources before repeating a claim.
 - If the field is empty, say "nothing found" and list the queries you
   tried. That is a valid result.
 - Do not write product code. Do not edit anything outside your one file.
